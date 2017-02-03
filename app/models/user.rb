@@ -37,21 +37,34 @@ class User < ActiveRecord::Base
 
   ## TODO 実装
   def have(item)
-    
+    # current_userが持っている商品のitem_idをhavesに保存する
+    haves.find_or_create_by(item_id: item.id) #この時user_idも保存されている？そういうメソッド？
   end
 
   def unhave(item)
+    # current_userのhavesからitem_idを削除する
+    have = haves.find_by(item_id: item.id)
+    have.destroy if have
   end
 
   def have?(item)
+    # current_userのhavesにitem_idがあるかチェックする
+    haves.include?(item)
   end
 
   def want(item)
+    # current_userが欲しい商品のitem_idをwantsに保存する
+    wants.find_or_create_by(item_id: item.id)
   end
 
   def unwant(item)
+    # current_userのwantsからitem_idを削除する
+    want = wants.find_by(item_id: item.id)
+    want.destroy if want
   end
 
   def want?(item)
+    # current_userのwantsにitem_idがあるかチェックする
+    wants.include?(item_id: item.id)
   end
 end
