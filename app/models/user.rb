@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   has_many :items ,through: :ownerships
   
   has_many :wants, class_name: "Want", foreign_key: "user_id", dependent: :destroy
-  has_many :want_items, through: :wants, source: item
+  has_many :want_items, through: :wants, source: :item
   
   has_many :haves, class_name: "Have", foreign_key: "user_id", dependent: :destroy
   has_many :have_items, through: :haves, source: :item
@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
 
   def have?(item)
     # current_userのhavesにitem_idがあるかチェックする
-    haves.include?(item)
+    have_items.include?(item)
   end
 
   def want(item)
@@ -65,6 +65,6 @@ class User < ActiveRecord::Base
 
   def want?(item)
     # current_userのwantsにitem_idがあるかチェックする
-    wants.include?(item_id: item.id)
+    want_items.include?(item)
   end
 end
