@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   ## TODO 実装
   def have(item)
     # current_userが持っている商品のitem_idをhavesに保存する
-    haves.find_or_create_by(item_id: item.id)
+    haves.find_or_create_by(item_id: item.id) #この時user_idも保存されている？そういうメソッド？
   end
 
   def unhave(item)
