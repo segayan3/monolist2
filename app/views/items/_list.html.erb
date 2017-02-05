@@ -16,7 +16,11 @@
             <%= item.title %>
           </p>
         </div>
-        <%= render 'items/action' , item: item if logged_in? %>
+        <% if logged_in? %>
+          <%= render 'items/action' , item: item %>
+        <% else %>
+          <%= render 'items/action2', item: item %>
+        <% end %>
       </div>
     <% end %>
   </div>
