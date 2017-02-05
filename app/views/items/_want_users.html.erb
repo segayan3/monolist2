@@ -1,0 +1,5 @@
+<div class="row">
+  <% @item.want_users.each do |user| %>
+    <%= link_to gravatar_for(user, :size => 30), user_path(user) %>
+  <% end %>
+</div>
