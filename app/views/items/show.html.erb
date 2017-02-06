@@ -1,6 +1,6 @@
 <% content_for :head do %>
-  <meta property="title" content="title:<%= @item.title %> - monolist" />
-  <meta property="description" content="description:<%= @item.title %>に関する情報です。この商品を欲しい人、持ってる人を表示しています。" />
+  <title><%= @item.title %> - monolist</title>
+  <meta name="description" content="<%= @item.title %>に関する情報です。この商品を欲しい人、持ってる人を表示しています。" />
 <% end %>
 
 <div class="container">
@@ -16,10 +16,16 @@
         <% #TODO 商品タイトル %>
         <%= @item.title %>
       </div>
-      <%= render 'action' , item: @item %>
+      <% if logged_in? %>
+        <%= render 'action' , item: @item %>
+      <% else %>
+        <%= render 'action2', item: @item %>
+      <% end %>
     </div>
+
     <div class="item-single-side">
       <div class="side-box">
+      <% if logged_in? %>
         <h4 class="side-box-title">Haveしたユーザー</h4>
         <div class="side-box-body">
           <% # TODO Haveしたユーザー一覧 %>
@@ -33,6 +39,7 @@
           <%= render 'want_users' %>
         </div>
       </div>
+      <% end %>
       <div class="text-center">
         <% #TODO 正しいリンク先に %>
         <%= link_to('楽天詳細ページへ',  @item.detail_page_url) %>
